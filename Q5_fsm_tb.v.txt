@@ -1,0 +1,34 @@
+module fsm_tb;
+
+    reg clk;
+    reg reset;
+    reg w;
+
+    wire Y;
+
+    fsm objects(.sequence_in(w), .clock(clk), .reset(reset), .out(Y));
+
+    initial begin
+        clk=1'b1;
+    forever
+        #5 clk=~clk;
+    end
+
+    initial
+    begin
+        $dumpfile("fsm_tb.vcd");
+        $dumpvars(0,fsm_tb);
+        w=1'b0;
+        reset=1'b1;
+        #30 reset=1'b0;
+        #10 w=1'b1;
+        #10 $finish;
+    end
+
+    initial begin
+        $monitor ($time, " Input stream = %d, Reset = %d Output stream = %d", w, reset, Y);
+    forever
+        #10 $monitor ($time, " Input stream = %d, Reset = %d Output stream = %d", w, reset, Y);
+    end
+
+endmodule
