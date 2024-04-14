@@ -1,0 +1,12 @@
+module Bit_Binary_Vector (A, f);
+    input [7:0] A;
+    output reg f;
+    integer k;
+
+    always @(A)
+    begin
+        f = A[1] & A[0];
+        for (k=2;k<8;k=k+1)
+            f = f | (A[k] & A[k-1]);
+    end
+endmodule

@@ -1,0 +1,36 @@
+module tb_Bit_Binary_Vector;
+
+    reg [7:0] A;
+    wire f;
+
+    // Instantiate the module under test
+    Bit_Binary_Vector object (
+        .A(A),
+        .f(f)
+    );
+
+    // Clock generation
+    reg clk = 0;
+    always #5 clk = ~clk;
+
+    // Initial block
+    initial begin
+        //$dumpfile("test.vcd");
+        $dumpvars(0,tb_Bit_Binary_Vector);
+
+        // Initialize test vector
+        A = 8'b11011010;
+
+        // Apply stimulus and monitor results
+        $monitor("Time=%0t A=%b f=%b", $time, A, f);
+
+        // Apply stimulus for 20 time units
+        repeat (20) begin
+            #5 A = $random; // You can replace this with your desired test vector generation logic
+        end
+
+        // End simulation
+        $stop;
+    end
+
+endmodule
