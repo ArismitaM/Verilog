@@ -1,0 +1,9 @@
+module funcf(w1,w2,w3,f);
+	input w1,w2,w3;
+	output f;
+	wire w1w2, w1w3, w2w3;
+		assign w1w3 = ~((~w1)|(~w3));
+		assign w2w3 = ((w2&w3) | ((~w2)&w2));
+		assign w1w2 = ((w2&w1) | ((~w2)&w2));
+		assign f = w1w2 | w1w3 | w2w3;
+endmodule

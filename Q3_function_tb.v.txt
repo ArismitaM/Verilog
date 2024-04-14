@@ -1,0 +1,62 @@
+module funcf_tb;
+    reg w1, w2, w3;
+    wire f;
+    parameter stop_time  = 100;
+    funcf objects(w1,w2,w3,f);
+
+initial #stop_time $finish;
+
+    initial begin
+        // Stimulus 1
+        w1 = 0;
+        w2 = 0;
+        w3 = 0;
+        #10;
+
+        // Stimulus 2
+        w1 = 0;
+        w2 = 0;
+        w3 = 1;
+        #10;
+
+        // Stimulus 3
+        w1 = 0;
+        w2 = 1;
+        w3 = 0;
+        #10;
+
+        // Stimulus 4
+        w1 = 0;
+        w2 = 1;
+        w3 = 1;
+        #10;
+
+        // Stimulus 5
+        w1 = 1;
+        w2 = 0;
+        w3 = 0;
+        #10;
+
+        // Stimulus 6
+        w1 = 1;
+        w2 = 0;
+        w3 = 1;
+        #10;
+
+	//stimulus 7
+	w1=1;
+	w2=1;
+	w3=0;
+	#10;
+
+	//stimulus 8
+	w1=1;
+	w2=1;
+	w3=1;
+	#10;
+    end
+    initial begin
+	$monitor($time,, " %b %b %b %b " , w1,w2,w3,f);
+	$monitor("time = ", $time ,, "w1=%b w2=%b w3=%b f=%b", w1,w2,w3,f);
+    end
+endmodule
